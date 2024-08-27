@@ -1,4 +1,4 @@
-# figma-extractor
+# Figma Frame Extractor
 
 A simple tool to extract images from Figma files.
 
@@ -18,19 +18,21 @@ yarn
 
 ## Configuration
 
-Edit `.env.sample` and rename it to `.env`. The file should contain the following variables:
+Rename `.env.sample` to `.env`. and include the following information:
 
 - `FIGMA_TOKEN`: a Personal Access Token, which can be created in the Figma account settings.
 - `FIGMA_FILE`: the file ID of the Figma file you want to extract images from.
 - `PUBLIC_PATH`: the path where the images will be saved.
 
-## How to use it
+## Running it
 
-### Result
+```sh
+yarn start
+```
 
-# Customizing
+## Customizing the export
 
-The Extractor class expects the following parameters:
+The `Extractor` class expects the following parameters:
 
 ````js
 personalAccessToken // Figma personal access token
