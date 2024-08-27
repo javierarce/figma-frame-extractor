@@ -90,8 +90,8 @@ The `customOptions` object can have the following optional properties:
 - **logger**: A custom logger function
 - **types**: An array of types to extract
 
-The following example demonstrates how to use the `nameFilter` and `logger` options
-to customize the export and only extract components that start with the word "block":
+The following example demonstrates how to use the `nameFilter` to customize the
+export and only extract components that start with the word "block":
 
 ```js
     {
