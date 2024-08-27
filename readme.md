@@ -20,15 +20,25 @@ yarn
 
 Rename `.env.sample` to `.env`. and include the following information:
 
-- `FIGMA_TOKEN`: a Personal Access Token, which can be created in the Figma account settings.
-- `FIGMA_FILE`: the file ID of the Figma file you want to extract images from.
+- `FIGMA_TOKEN`: your Personal Access Token (create one in your Figma account settings)
+- `FIGMA_FILE`: the file ID of the Figma file you want to extract images from
 - `PUBLIC_PATH`: the path where the images will be saved.
 
 ## Running it
 
 ```sh
+npm run start
+```
+
+or
+
+```sh
 yarn start
 ```
+
+When the script finishes, you will find the extracted images in the folder
+defined in the `PUBLIC_PATH` variable. The optimized images will be saved
+inside the `PUBLIC_PATH/output` folder.
 
 ## Customizing the export
 
@@ -48,7 +58,8 @@ const extractor = new Extractor(
   {
     format: "svg",
     pageID: CONFIG.PAGE_ID,
-  }, {
+  },
+  {
     logger: customLogger,
     types: ["COMPONENT"],
   },
@@ -73,12 +84,14 @@ const extractor = new Extractor(
 
 ### Custom Options
 
-- **nameFilter**: A custom function that lets you filter the components by name.
-- **logger**: A custom logger function.
-- **types**: An array of types to extract.
+The `customOptions` object can have the following optional properties:
 
-The following example shows how to use the `nameFilter` and `logger` options to customize the export and
-only extract components that start with the word "block".
+- **nameFilter**: A custom function to filter components by name
+- **logger**: A custom logger function
+- **types**: An array of types to extract
+
+The following example demonstrates how to use the `nameFilter` and `logger` options
+to customize the export and only extract components that start with the word "block":
 
 ```js
     {
@@ -86,4 +99,18 @@ only extract components that start with the word "block".
       logger: customLogger,
       types: ["COMPONENT"],
     },
+```
+
+### SVG Optimization
+
+The script uses [svgo](https://svgo.dev) to optimize SVG files. You can customize the optimization options by editing the corresponding section of the `index.js` file:
+
+```js
+const svgo = new SVGO({
+  plugins: [
+    "cleanupIDs",
+    { removeViewBox: false },
+    { convertShapeToPath: false },
+  ],
+});
 ```
