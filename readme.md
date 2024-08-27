@@ -34,7 +34,7 @@ yarn start
 
 The `Extractor` class expects the following parameters:
 
-````js
+```js
 personalAccessToken // Figma personal access token
 fileID // Figma file ID
 apiOptions = {} // Figma API options
