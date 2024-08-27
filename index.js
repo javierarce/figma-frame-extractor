@@ -56,7 +56,7 @@ function validateConfig() {
 }
 
 // Optimize SVG files
-async function optimizeFiles(files) {
+async function optimizeSVGFiles(files) {
   customLogger("Optimizing SVG files");
 
   let optimizedCount = 0;
@@ -71,6 +71,10 @@ async function optimizeFiles(files) {
   }
 
   for (const file of files) {
+    if (file.filename && file.filename.endsWith(".svg") === false) {
+      continue;
+    }
+
     const inputPath = path.join(CONFIG.PUBLIC_PATH, file.filename);
     const outputPath = path.join(outputDir, file.filename);
 
@@ -118,7 +122,7 @@ async function extractAndProcessSVGs() {
 
   try {
     const files = await extractor.extract(CONFIG.PUBLIC_PATH);
-    await optimizeFiles(files);
+    await optimizeSVGFiles(files);
     spinner.succeed(`Successfully extracted ${files.length} SVG files`);
   } catch (error) {
     spinner.fail(`Error during extraction: ${error.message}`);
